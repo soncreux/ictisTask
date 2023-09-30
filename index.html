@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">    
+    <title>Document</title>
+    
+</head>
+<body>
+    <header>
+        <h1>Командировки</h1>
+    </header>
+
+    <div class="photo-container">
+        <img src="" alt="">
+    </div>
+
+    <div class="trip-form">
+        <form   id="form-id" class="form-classes" >
+            <div class="form-date-picker">
+                <label for="start-date-picker">Начало командировки: </label>
+                <input id="start-date-picker" class="datepicker-input" type="date" placeholder="Дата" name="data-pick1" min="2023-09-27" required>
+                <label for="end-date-picker">Конец командировки: </label>
+                <input id="end-date-picker" class="datepicker-input" type="date" placeholder="Дата" name="data-pick2" min="2023-09-28" required>
+            </div>
+
+            <label for="images" class="drop-container" id="dropcontainer">
+                <span class="drop-title">Перетащите файлы</span>
+                или
+                <input type="file" id="images" accept=".pdf" required>
+              </label>
+              
+            
+            
+            <div id="people-number-picker", class="people-number-picker">
+                <label for="quantity">Количество человек:</label>
+                <input onclick = "addPerson()" type="number" id="quantity" name="quantity" min="1" max="30" value="1" required> 
+            </div>
+            
+            <div id="container">
+                Человек 1
+                <input type="text" name="FullName" placeholder="ФИО" required="">
+                <input type="text" name="dob" placeholder="Должность" required="">
+                <input type="text" name="kafedra" placeholder="Кафедра" required="">
+                <input type="email" name="mail" placeholder="yourmail@sfedu.ru" required="">
+                <input type="tel" name="phone" placeholder="+7 (___) ___-__-__"  required="">
+            </div>
+
+            <div>
+                <input type="submit" value="Отправить">
+            </div>
+            
+        </form>
+
+    </div>
+    <script>
+        document.getElementById("form-id").addEventListener("submit", function(event) {
+            
+
+            var formData = new FormData(this);
+
+            // Отправить данные на сервер с помощью Ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "backend.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Обработка ответа от сервера 
+                    alert(xhr.responseText); // Показать ответ от сервера во всплывающем окне
+                }
+            };
+            xhr.send(formData);
+        }); 
+    </script>
+    <script src="myscript.js"></script> 
+</body>
+</html>
